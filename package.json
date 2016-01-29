@@ -1,0 +1,43 @@
+{
+  "name": "metalsmith-default-values",
+  "version": "0.0.1",
+  "description": "A metalsmith plugin for setting default values for frontmatter metadata.",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "joi": "^7.2.2",
+    "lodash.get": "^4.0.1",
+    "lodash.set": "^4.0.0",
+    "multimatch": "^2.1.0"
+},
+  "devDependencies": {
+    "eslint": "latest",
+    "tape": "latest",
+    "nodemon": "latest"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node test",
+    "posttest": "npm run lint",
+    "lint": "eslint --ignore-pattern node_modules **/*.js",
+    "dev": "nodemon --exec 'npm test'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woodyrew/metalsmith-default-values.git"
+  },
+  "keywords": [
+    "Metalsmith",
+    "Plugin",
+    "default"
+  ],
+  "author": {
+    "name": "Woody Goodricke",
+    "email": "github@andrewgoodricke.com",
+    "url": "http://andrewgoodricke.com"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/woodyrew/metalsmith-default-values/issues"
+  },
+  "homepage": "https://github.com/woodyrew/metalsmith-default-values#readme"
+}
