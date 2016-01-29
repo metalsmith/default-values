@@ -1,4 +1,7 @@
 # metalsmith-default-values
+[![npm version][npm-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+
 Metalsmith Plugin for setting default frontmatter metadata
 
 ## Installation
@@ -45,3 +48,9 @@ metalsmith-default-values is free software: you can redistribute it and/or modif
 metalsmith-default-values is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with metalsmith-default-values.  If not, see http://www.gnu.org/licenses/.
+
+
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-default-values.svg
+[npm-url]: https://www.npmjs.com/package/metalsmith-default-values
+[travis-badge]: https://travis-ci.org/woodyrew/metalsmith-default-values.svg?branch=master
+[travis-url]: https://travis-ci.org/woodyrew/metalsmith-default-values
