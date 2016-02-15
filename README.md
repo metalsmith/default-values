@@ -2,7 +2,7 @@
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 
-Metalsmith Plugin for setting default frontmatter metadata
+Metalsmith Plugin for setting default front-matter metadata
 
 ## Installation
 ```bash
@@ -15,7 +15,7 @@ npm install -S metalsmith-default-values
 
 ### 1. Include the plugin
 ```js
-var default_values = require('./modules/default_values.js');
+var default_values = require('metalsmith-default_values');
 ```
 
 ### 2. Use the plugin in your build pipeline
