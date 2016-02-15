@@ -1,6 +1,7 @@
 # metalsmith-default-values
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
+[![bitHound Dependencies][bithound-badge]][bithound-url]
 
 Metalsmith Plugin for setting default front-matter metadata
 
@@ -52,5 +53,9 @@ You should have received a copy of the GNU General Public License along with met
 
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-default-values.svg
 [npm-url]: https://www.npmjs.com/package/metalsmith-default-values
+
 [travis-badge]: https://travis-ci.org/woodyrew/metalsmith-default-values.svg?branch=master
 [travis-url]: https://travis-ci.org/woodyrew/metalsmith-default-values
+
+[bithound-badge]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/badges/dependencies.svg
+[bithound-url]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/master/dependencies/npm
