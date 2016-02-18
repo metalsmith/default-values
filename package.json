@@ -10,7 +10,7 @@
     "multimatch": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "latest",
+    "eslint": "^1.10.3",
     "tape": "latest",
     "nodemon": "latest"
   },
