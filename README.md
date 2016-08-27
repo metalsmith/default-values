@@ -43,6 +43,9 @@ var default_values = require('metalsmith-default_values');
 ### 3. Profit
 [GL HF](http://www.urbandictionary.com/define.php?term=glhf)
 
+## Node versions
+Because [Joi](https://github.com/hapijs/joi/) > `v6` uses ES6 syntax this runs on NodeJS `v4` and above.
+
 # License - GPL-3.0
 metalsmith-default-values is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
