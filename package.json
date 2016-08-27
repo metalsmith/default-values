@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-default-values",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A metalsmith plugin for setting default values for frontmatter metadata.",
   "dependencies": {
     "debug": "^2.2.0",
