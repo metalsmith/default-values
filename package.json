@@ -10,13 +10,14 @@
     "multimatch": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^1.10.3",
-    "tape": "latest",
-    "nodemon": "latest"
+    "eslint": "^2.10.2",
+    "nodemon": "latest",
+    "tape": "^4.6.0",
+    "taper": "^0.5.0"
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "node test",
+    "test": "taper test",
     "posttest": "npm run lint",
     "lint": "eslint --ignore-pattern node_modules **/*.js",
     "dev": "nodemon --exec 'npm test'"
