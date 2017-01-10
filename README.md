@@ -16,7 +16,7 @@ npm install -S metalsmith-default-values
 
 ### 1. Include the plugin
 ```js
-var default_values = require('metalsmith-default_values');
+var default_values = require('metalsmith-default-values');
 ```
 
 ### 2. Use the plugin in your build pipeline
