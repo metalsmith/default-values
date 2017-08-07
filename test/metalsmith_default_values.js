@@ -1,14 +1,14 @@
 'use strict';
 
-var test = require('tap').test;
+const test = require('tap').test;
 
 // TODO: Add more tests to cover edge cases
 
 // metalsmith_default_values plugin
-test('metalsmith-default-values sets a key when not present', function (assert) {
-    var default_values_lib = require('../lib');
+test('metalsmith-default-values sets a key when not present', (assert) => {
+    const default_values_lib = require('../lib');
 
-    var default_values = default_values_lib([
+    const default_values = default_values_lib([
         {
             defaults: {default_val: true}
         },
@@ -17,7 +17,7 @@ test('metalsmith-default-values sets a key when not present', function (assert) 
             defaults: {another_default: 'hello'}
         }
     ]);
-    var actual = {
+    const actual = {
         'file1': {
             existing_key: 'yes'
         },
@@ -26,7 +26,7 @@ test('metalsmith-default-values sets a key when not present', function (assert) 
             default_val : false
         }
     };
-    var expected = {
+    const expected = {
         'file1': {
             existing_key: 'yes',
             default_val : true
@@ -37,7 +37,7 @@ test('metalsmith-default-values sets a key when not present', function (assert) 
             another_default: 'hello'
         }
     };
-    default_values(actual, void 0, function (err) {
+    default_values(actual, void 0, (err) => {
         assert.ifError(err, 'Has not errored');
         assert.isEquivalent(actual, expected, 'Defaults set where key not present');
         assert.end();
