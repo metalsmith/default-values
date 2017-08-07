@@ -1,13 +1,13 @@
 'use strict';
 
-var test = require('tape');
+var test = require('tap').test;
 var set_defaults_lib = require('../lib/set_defaults');
 
 test('set-defaults initialisation returns a function', function (assert) {
     var actual = set_defaults_lib();
 
-    assert.end();
     assert.isEqual(typeof actual, 'function', 'Function returned after initialisation');
+    assert.end();
 });
 
 test('set-defaults sets a key when not present', function (assert) {
