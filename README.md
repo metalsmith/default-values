@@ -3,7 +3,9 @@
 [![Build Status][travis-badge]][travis-url]
 [![bitHound Dependencies][bithound-badge]][bithound-url]
 
-Metalsmith Plugin for setting default front-matter metadata
+Metalsmith Plugin for setting default front-matter metadata.
+
+Uses [multimatch](https://github.com/sindresorhus/multimatch#multimatch-) for pattern matching.
 
 ## Installation
 ```bash
@@ -34,6 +36,21 @@ var default_values = require('metalsmith-default-values');
 		defaults: {
 			layout : 'diary.hbs',
 			private: true
+		}
+    },
+	{
+		pattern : [
+            'diary/*.md',
+            'archive/**/*.md'
+        ],
+		defaults: {
+			no_index: true
+		}
+    },
+	{
+		pattern : '**/*.md',
+		defaults: {
+			layout : 'default.hbs'
 		}
 	}
 ]))
