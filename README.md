@@ -1,8 +1,15 @@
 # metalsmith-default-values
 
-[![npm version][npm-badge]][npm-url] [![Build Status][travis-badge]][travis-url] [![code style: prettier][prettier-badge]][prettier-url]
-[![bitHound Dependencies][bithound-badge]][bithound-url] [![bitHound Dev Dependencies][bithound-dev-badge]][bithound-url] [![bitHound Code][bithound-code-badge]][bithound-code-url]
-[![Known Vulnerabilities][snyk-badge]][synk-url] [![NSP Status][nsp-badge]][nsp-url] [![Package Quality][quality-badge]][quality-url]
+[![npm version][npm-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+[![code style: prettier][prettier-badge]][prettier-url]
+[![bitHound Dependencies][bithound-badge]][bithound-url]
+[![bitHound Dev Dependencies][bithound-dev-badge]][bithound-url]
+[![bitHound Code][bithound-code-badge]][bithound-code-url]
+
+[![Known Vulnerabilities][snyk-badge]][synk-url]
+[![NSP Status][nsp-badge]][nsp-url]
+[![Package Quality][quality-badge]][quality-url]
 
 Metalsmith Plugin for setting default front-matter metadata.
 
