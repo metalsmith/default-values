@@ -1,81 +1,99 @@
 # metalsmith-default-values
+
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![bitHound Dependencies][bithound-badge]][bithound-url]
+[![bitHound Dev Dependencies][bithound-dev-badge]][bithound-url]
+[![Package Quality][quality-badge]][quality-url]
+[![code style: prettier][prettier-badge]][prettier-url]
 
 Metalsmith Plugin for setting default front-matter metadata.
 
 Uses [multimatch](https://github.com/sindresorhus/multimatch#multimatch-) for pattern matching.
 
 ## Installation
+
 ```bash
 npm install -S metalsmith-default-values
 ```
 
-*Note*: `-S` switch saves the plugin to your `package.json`.
+_Note_: `-S` switch saves the plugin to your `package.json`.
 
 ## Usage:
 
 ### 1. Include the plugin
+
 ```js
-var default_values = require('metalsmith-default-values');
+const default_values = require('metalsmith-default-values');
 ```
 
 ### 2. Use the plugin in your build pipeline
+
 ```js
 ...
 .use(default_values([
-    {
-        pattern : 'posts/*.md',
-        defaults: {
-            layout: 'post.hbs'
-        }
-    },
-	{
-		pattern : 'diary/*.md',
-		defaults: {
-			layout : 'diary.hbs',
-			private: true
-		}
-    },
-	{
-		pattern : [
-            'diary/*.md',
-            'archive/**/*.md'
-        ],
-		defaults: {
-			no_index: true
-		}
-    },
-	{
-		pattern : '**/*.md',
-		defaults: {
-			layout : 'default.hbs'
-		}
-	}
+  {
+    pattern : 'posts/*.md',
+    defaults: {
+      layout: 'post.hbs'
+    }
+  },
+  {
+    pattern : 'diary/*.md',
+    defaults: {
+      layout : 'diary.hbs',
+      private: true
+    }
+  },
+  {
+    pattern : [
+      'diary/*.md',
+      'archive/**/*.md'
+    ],
+    defaults: {
+      no_index: true
+    }
+  },
+  {
+    pattern : '**/*.md',
+    defaults: {
+      layout : 'default.hbs'
+    }
+  }
 ]))
 ...
 ```
 
 ### 3. Profit
+
 [GL HF](http://www.urbandictionary.com/define.php?term=glhf)
 
 ## Node versions
+
 Because [Joi](https://github.com/hapijs/joi/) > `v6` uses ES6 syntax this runs on NodeJS `v4` and above.
 
+## Contributions
+
+Make sure you have [EditorConfig plugin](http://editorconfig.org/#download) for your editor.
+
+`npm test` runs the tests, also uses [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
+
 # License - GPL-3.0
+
 metalsmith-default-values is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-metalsmith-default-values is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+metalsmith-default-values is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with metalsmith-default-values.  If not, see http://www.gnu.org/licenses/.
-
+You should have received a copy of the GNU General Public License along with metalsmith-default-values. If not, see http://www.gnu.org/licenses/.
 
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-default-values.svg
 [npm-url]: https://www.npmjs.com/package/metalsmith-default-values
-
 [travis-badge]: https://travis-ci.org/woodyrew/metalsmith-default-values.svg?branch=master
 [travis-url]: https://travis-ci.org/woodyrew/metalsmith-default-values
-
 [bithound-badge]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/badges/dependencies.svg
+[bithound-dev-badge]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/badges/devDependencies.svg
 [bithound-url]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/master/dependencies/npm
+[quality-badge]: http://npm.packagequality.com/shield/metalsmith-default-values.svg
+[quality-url]: http://packagequality.com/#?package=metalsmith-default-values
+[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
+[prettier-url]: https://github.com/prettier/prettier
