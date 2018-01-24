@@ -3,13 +3,13 @@
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![code style: prettier][prettier-badge]][prettier-url]
+
 [![bitHound Dependencies][bithound-badge]][bithound-url]
 [![bitHound Dev Dependencies][bithound-dev-badge]][bithound-url]
 [![bitHound Code][bithound-code-badge]][bithound-code-url]
 
 [![Known Vulnerabilities][snyk-badge]][synk-url]
 [![NSP Status][nsp-badge]][nsp-url]
-[![Package Quality][quality-badge]][quality-url]
 
 Metalsmith Plugin for setting default front-matter metadata.
 
@@ -99,8 +99,6 @@ You should have received a copy of the GNU General Public License along with met
 [bithound-url]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/master/dependencies/npm
 [bithound-code-badge]: https://www.bithound.io/github/woodyrew/metalsmith-default-values/badges/code.svg
 [bithound-code-url]: https://www.bithound.io/github/woodyrew/metalsmith-default-values
-[quality-badge]: http://npm.packagequality.com/shield/metalsmith-default-values.svg
-[quality-url]: http://packagequality.com/#?package=metalsmith-default-values
 [prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 [prettier-url]: https://github.com/prettier/prettier
 [snyk-badge]: https://snyk.io/test/github/woodyrew/metalsmith-default-values/badge.svg
