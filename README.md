@@ -1,4 +1,4 @@
-# metalsmith-default-values
+# Metalsmith Default Values
 
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
