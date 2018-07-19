@@ -18,11 +18,17 @@
     "eslint-plugin-prettier": "^2.5.0",
     "nodemon": "^1.11.0",
     "prettier": "^1.10.2",
-    "tap": "^11.0.1"
+    "tap": "^12.0.1"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "joi",
+      "eslint"
+    ]
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "tap test",
+    "test": "tap test -J",
     "posttest": "npm run lint",
     "lint": "eslint --cache --fix .",
     "dev": "nodemon --exec 'npm test'",
