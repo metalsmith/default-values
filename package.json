@@ -28,10 +28,11 @@
   },
   "main": "lib/index.js",
   "scripts": {
+    "pretest": "npm run lint",
     "test": "tap test -J",
-    "posttest": "npm run lint",
     "lint": "eslint --cache --fix .",
     "dev": "nodemon --exec 'npm test'",
+    "preversion": "npm test",
     "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
