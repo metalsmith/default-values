@@ -1,10 +1,10 @@
 # Metalsmith Default Values
 
-
 [![npm version][npm-badge]][npm-url]
-[![Build Status][travis-badge]][travis-url]
 [![code style: prettier][prettier-badge]][prettier-url]
+[![metalsmith: plugin][metalsmith-badge]][metalsmith-url]
 
+[![Build Status][travis-badge]][travis-url]
 [![Known Vulnerabilities][snyk-badge]][synk-url]
 [![NSP Status][nsp-badge]][nsp-url]
 [![Greenkeeper badge](https://badges.greenkeeper.io/woodyrew/metalsmith-default-values.svg)](https://greenkeeper.io/)
@@ -101,3 +101,5 @@ You should have received a copy of the GNU General Public License along with met
 [synk-url]: https://snyk.io/test/github/woodyrew/metalsmith-default-values
 [nsp-badge]: https://nodesecurity.io/orgs/woodyrew/projects/14b90fd0-d8f1-4156-8e1c-d690a8c4f197/badge
 [nsp-url]: https://nodesecurity.io/orgs/woodyrew/projects/14b90fd0-d8f1-4156-8e1c-d690a8c4f197
+[metalsmith-badge]: https://img.shields.io/badge/metalsmith-plugin-green.svg?longCache=true
+[metalsmith-url]: http://metalsmith.io
