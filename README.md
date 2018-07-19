@@ -1,5 +1,7 @@
 # Metalsmith Default Values
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/woodyrew/metalsmith-default-values.svg)](https://greenkeeper.io/)
+
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
 [![code style: prettier][prettier-badge]][prettier-url]
