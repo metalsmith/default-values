@@ -37,7 +37,10 @@ const default_values = require('metalsmith-default-values');
   {
     pattern : 'posts/*.md',
     defaults: {
-      layout: 'post.hbs'
+      layout: 'post.hbs',
+      date: function (post) {
+        return post.stats.ctime;
+      }
     }
   },
   {
