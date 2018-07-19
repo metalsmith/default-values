@@ -1,6 +1,5 @@
 # Metalsmith Default Values
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/woodyrew/metalsmith-default-values.svg)](https://greenkeeper.io/)
 
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
@@ -8,6 +7,7 @@
 
 [![Known Vulnerabilities][snyk-badge]][synk-url]
 [![NSP Status][nsp-badge]][nsp-url]
+[![Greenkeeper badge](https://badges.greenkeeper.io/woodyrew/metalsmith-default-values.svg)](https://greenkeeper.io/)
 
 Metalsmith Plugin for setting default front-matter metadata.
 
@@ -92,7 +92,7 @@ You should have received a copy of the GNU General Public License along with met
 [npm-url]: https://www.npmjs.com/package/metalsmith-default-values
 [travis-badge]: https://travis-ci.org/woodyrew/metalsmith-default-values.svg?branch=master
 [travis-url]: https://travis-ci.org/woodyrew/metalsmith-default-values
-[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
+[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
 [snyk-badge]: https://snyk.io/test/github/woodyrew/metalsmith-default-values/badge.svg
 [synk-url]: https://snyk.io/test/github/woodyrew/metalsmith-default-values
