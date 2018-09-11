@@ -1,11 +1,10 @@
 'use strict';
 
 const test = require('tap').test;
-
 // metalsmith_default_values plugin
-test('metalsmith-default-values sets a key when not present', assert => {
-  const default_values_lib = require('../lib');
+const default_values_lib = require('..');
 
+test('metalsmith-default-values sets a key when not present', assert => {
   const default_values = default_values_lib([
     {
       defaults: { default_val: true }
