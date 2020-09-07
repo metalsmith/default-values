@@ -1,4 +1,4 @@
-# Metalsmith Default Values
+# @metalsmith/default-values
 
 [![npm version][npm-badge]][npm-url]
 [![code style: prettier][prettier-badge]][prettier-url]
@@ -16,7 +16,7 @@ Uses [multimatch](https://github.com/sindresorhus/multimatch#multimatch-) for pa
 ## Installation
 
 ```bash
-npm install -S metalsmith-default-values
+npm install -S @metalsmith/default-values
 ```
 
 _Note_: `-S` switch saves the plugin to your `package.json`.
@@ -26,7 +26,7 @@ _Note_: `-S` switch saves the plugin to your `package.json`.
 ### 1. Include the plugin
 
 ```js
-const default_values = require('metalsmith-default-values');
+const default_values = require('@metalsmith/default-values');
 ```
 
 ### 2. Use the plugin in your build pipeline
@@ -91,8 +91,8 @@ metalsmith-default-values is distributed in the hope that it will be useful, but
 
 You should have received a copy of the GNU General Public License along with metalsmith-default-values. If not, see http://www.gnu.org/licenses/.
 
-[npm-badge]: https://img.shields.io/npm/v/metalsmith-default-values.svg
-[npm-url]: https://www.npmjs.com/package/metalsmith-default-values
+[npm-badge]: https://img.shields.io/npm/v/@metalsmith/default-values.svg
+[npm-url]: https://www.npmjs.com/package/@metalsmith/default-values
 [travis-badge]: https://travis-ci.org/woodyrew/metalsmith-default-values.svg?branch=master
 [travis-url]: https://travis-ci.org/woodyrew/metalsmith-default-values
 [prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
