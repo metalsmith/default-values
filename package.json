@@ -1,5 +1,5 @@
 {
-  "name": "metalsmith-default-values",
+  "name": "@metalsmith/default-values",
   "version": "3.0.0",
   "description": "A metalsmith plugin for setting default values for frontmatter metadata.",
   "engines": {
@@ -22,16 +22,16 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "pretest": "npm run lint",
+    "pretest": "npm run lint:fix",
     "test": "tap test -J",
-    "lint": "eslint --cache --fix .",
+    "lint:fix": "eslint --cache --fix .",
     "dev": "nodemon --exec 'npm test'",
     "preversion": "npm test",
-    "postversion": "git push && git push --tags && npm publish"
+    "postversion": "git push && git push --tags && npm publish --scope=@metalsmith"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/woodyrew/metalsmith-default-values.git"
+    "url": "git+https://github.com/metalsmith/default-values.git"
   },
   "keywords": [
     "Metalsmith",
@@ -45,7 +45,7 @@
   },
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/woodyrew/metalsmith-default-values/issues"
+    "url": "https://github.com/metalsmith/default-values/issues"
   },
-  "homepage": "https://github.com/woodyrew/metalsmith-default-values#readme"
+  "homepage": "https://github.com/metalsmith/default-values#readme"
 }
