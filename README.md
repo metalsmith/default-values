@@ -70,10 +70,6 @@ const default_values = require('@metalsmith/default-values');
 
 [GL HF](http://www.urbandictionary.com/define.php?term=glhf)
 
-## Node versions
-
-Because [Joi](https://github.com/hapijs/joi/) > `v6` uses ES6 syntax this runs on NodeJS `v4` and above.
-
 ## Contributions
 
 Make sure you have [EditorConfig plugin](http://editorconfig.org/#download) for your editor.

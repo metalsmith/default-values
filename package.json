@@ -2,9 +2,6 @@
   "name": "@metalsmith/default-values",
   "version": "3.0.0",
   "description": "A metalsmith plugin for setting default values for frontmatter metadata.",
-  "engines": {
-    "node": ">=4.x"
-  },
   "dependencies": {
     "debug": "^4.1.1",
     "joi": "^17.2.1",
