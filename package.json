@@ -38,14 +38,14 @@
     "Plugin",
     "default"
   ],
-  "author": {
-    "name": "Woody Goodricke",
-    "email": "github@andrewgoodricke.com",
-    "url": "http://andrewgoodricke.com"
-  },
+  "author": "Woody Goodricke <github@andrewgoodricke.com> (http://andrewgoodricke.com)",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/metalsmith/default-values/issues"
   },
-  "homepage": "https://github.com/metalsmith/default-values#readme"
+  "homepage": "https://github.com/metalsmith/default-values#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }
