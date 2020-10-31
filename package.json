@@ -3,18 +3,18 @@
   "version": "3.0.2",
   "description": "A metalsmith plugin for setting default values for frontmatter metadata.",
   "dependencies": {
-    "debug": "^4.1.1",
-    "joi": "^17.2.1",
+    "debug": "^4.2.0",
+    "joi": "^17.3.0",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
-    "multimatch": "^4.0.0"
+    "multimatch": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.8.1",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "nodemon": "^2.0.4",
-    "prettier": "^2.1.1",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2",
     "tap": "^14.10.8"
   },
   "main": "lib/index.js",
