@@ -1,36 +1,35 @@
 # @metalsmith/default-values
 
-[![npm version][npm-badge]][npm-url]
-[![code style: prettier][prettier-badge]][prettier-url]
-[![metalsmith: plugin][metalsmith-badge]][metalsmith-url]
+A Metalsmith plugin for setting default values to file metadata.
 
-[![Build Status][travis-badge]][travis-url]
-
-Metalsmith Plugin for setting default front-matter metadata.
+[![metalsmith: core plugin][metalsmith-badge]][metalsmith-url]
+[![npm: version][npm-badge]][npm-url]
+[![ci: build][ci-badge]][ci-url]
+[![code coverage][codecov-badge]][codecov-url]
+[![license: GPL-3.0][license-badge]][license-url]
 
 Uses [multimatch](https://github.com/sindresorhus/multimatch#multimatch-) for pattern matching.
 
 ## Installation
 
+NPM:
 ```bash
-npm install -S @metalsmith/default-values
+npm install @metalsmith/default-values
 ```
 
-_Note_: `-S` switch saves the plugin to your `package.json`.
+Yarn:
+```bash
+npm install @metalsmith/default-values
+```
 
 ## Usage:
 
-### 1. Include the plugin
+Pass `@metalsmith/default-values` to `metalsmith.use`:
 
 ```js
 const default_values = require('@metalsmith/default-values');
-```
 
-### 2. Use the plugin in your build pipeline
-
-```js
-...
-.use(default_values([
+metalsmith.use(default_values([
   {
     pattern : 'posts/*.md',
     defaults: {
@@ -63,32 +62,64 @@ const default_values = require('@metalsmith/default-values');
     }
   }
 ]))
-...
 ```
 
-### 3. Profit
+### Options
 
-[GL HF](http://www.urbandictionary.com/define.php?term=glhf)
+`@metalsmith/default-values` takes an array of objects which specify the defaults to set for all files matching a pattern. The objects have the following properties:
 
-## Contributions
+* `pattern` (`string|string[]`): One or more glob patterns to match file paths
+* `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
 
-Make sure you have [EditorConfig plugin](http://editorconfig.org/#download) for your editor.
+### Debug
 
-`npm test` runs the tests, also uses [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
+To enable debug logs, set the `DEBUG` environment variable to `@metalsmith/default-values`:
 
-# License - GPL-3.0
+Linux/Mac:
+```
+DEBUG=@metalsmith/default-values
+```
+Windows:
+```
+set "DEBUG=@metalsmith/default-values"
+```
 
-metalsmith-default-values is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+Alternatively you can set `DEBUG` to `@metalsmith/*` to debug all Metalsmith core plugins.
 
-metalsmith-default-values is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+### CLI usage
 
-You should have received a copy of the GNU General Public License along with metalsmith-default-values. If not, see http://www.gnu.org/licenses/.
+To use this plugin with the Metalsmith CLI, add `@metalsmith/default-values` to the `plugins` key in your `metalsmith.json` file:
+
+```json
+{
+  "plugins": [
+    {
+      "@metalsmith/default-values": [
+        {
+          pattern : "diary/*.md",
+          defaults: {
+            layout : "diary.hbs",
+            private: true
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+## License
+
+[GPL-3.0](LICENSE)
+
 
 [npm-badge]: https://img.shields.io/npm/v/@metalsmith/default-values.svg
 [npm-url]: https://www.npmjs.com/package/@metalsmith/default-values
-[travis-badge]: https://travis-ci.org/metalsmith/metalsmith-default-values.svg?branch=master
-[travis-url]: https://travis-ci.org/metalsmith/metalsmith-default-values
-[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
-[prettier-url]: https://github.com/prettier/prettier
-[metalsmith-badge]: https://img.shields.io/badge/metalsmith-plugin-green.svg?longCache=true
-[metalsmith-url]: http://metalsmith.io
+[ci-badge]: https://app.travis-ci.com/metalsmith/default-values.svg?branch=master
+[ci-url]: https://app.travis-ci.com/github/metalsmith/default-values
+[metalsmith-badge]: https://img.shields.io/badge/metalsmith-core_plugin-green.svg?longCache=true
+[metalsmith-url]: https://metalsmith.io
+[codecov-badge]: https://img.shields.io/coveralls/github/metalsmith/default-values
+[codecov-url]: https://coveralls.io/github/metalsmith/default-values
+[license-badge]: https://img.shields.io/github/license/metalsmith/default-values
+[license-url]: LICENSE

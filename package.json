@@ -1,7 +1,41 @@
 {
   "name": "@metalsmith/default-values",
   "version": "3.0.2",
-  "description": "A metalsmith plugin for setting default values for frontmatter metadata.",
+  "description": "A metalsmith plugin for setting default values to file metadata.",
+  "keywords": [
+    "default-values",
+    "metalsmith-plugin",
+    "metalsmith",
+    "static-site"
+  ],
+  "homepage": "https://github.com/metalsmith/default-values#readme",
+  "bugs": {
+    "url": "https://github.com/metalsmith/default-values/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metalsmith/default-values.git"
+  },
+  "license": "GPL-3.0",
+  "author": "Woody Goodricke <github@andrewgoodricke.com> (http://andrewgoodricke.com)",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "lib",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "changelog": "auto-changelog -u date --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)'",
+    "coverage": "nyc report --reporter=text-lcov > ./coverage.info",
+    "coveralls": "npm run coverage && cat ./coverage.info | coveralls",
+    "format": "prettier --write \"**/*.{yml,md,js,json}\"",
+    "lint": "eslint --cache --fix-dry-run .",
+    "release": "release-it .",
+    "test": "nyc mocha"
+  },
   "dependencies": {
     "debug": "^4.2.0",
     "joi": "^17.3.0",
@@ -10,39 +44,21 @@
     "multimatch": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.15.0",
+    "auto-changelog": "^2.3.0",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "mocha": "^7.2.0",
     "nodemon": "^2.0.6",
-    "prettier": "^2.1.2",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
     "tap": "^14.10.8"
   },
-  "main": "lib/index.js",
-  "scripts": {
-    "pretest": "npm run lint:fix",
-    "test": "tap test -J",
-    "lint:fix": "eslint --cache --fix .",
-    "dev": "nodemon --exec 'npm test'",
-    "preversion": "npm test",
-    "postversion": "git push && git push --tags && npm publish --scope=@metalsmith"
+  "engines": {
+    "node": ">=8"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/metalsmith/default-values.git"
-  },
-  "keywords": [
-    "Metalsmith",
-    "Plugin",
-    "default"
-  ],
-  "author": "Woody Goodricke <github@andrewgoodricke.com> (http://andrewgoodricke.com)",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/metalsmith/default-values/issues"
-  },
-  "homepage": "https://github.com/metalsmith/default-values#readme",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
+  "publishConfig": {
+    "access": "public"
   }
 }
