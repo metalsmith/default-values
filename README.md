@@ -19,7 +19,7 @@ npm install @metalsmith/default-values
 
 Yarn:
 ```bash
-npm install @metalsmith/default-values
+yarn add @metalsmith/default-values
 ```
 
 ## Usage:
@@ -96,10 +96,10 @@ To use this plugin with the Metalsmith CLI, add `@metalsmith/default-values` to 
     {
       "@metalsmith/default-values": [
         {
-          pattern : "diary/*.md",
-          defaults: {
-            layout : "diary.hbs",
-            private: true
+          "pattern": "diary/*.md",
+          "defaults": {
+            "layout": "diary.hbs",
+            "private": true
           }
         }
       ]
