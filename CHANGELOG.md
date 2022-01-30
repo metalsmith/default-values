@@ -1,6 +1,6 @@
 ### Changelog
 
-#### [v3.1.0](https://github.com/metalsmith/default-values/compare/v3.1.0...v3.0.1)
+#### [v3.1.0](https://github.com/metalsmith/default-values/compare/v3.1.0...v3.0.2)
 
 - Fix typo's in README, remove obsolete dependencies [`66c32b9`](https://github.com/metalsmith/default-values/commit/66c32b9)
 - Align plugin with other core plugins. Update package.json, generate changelog, fix debug namespace [`cae2058`](https://github.com/metalsmith/default-values/commit/cae2058)
