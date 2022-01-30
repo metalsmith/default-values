@@ -14,7 +14,7 @@ stages:
   - lint
   - test_windows
   - test
-  - codecov  
+  - codecov
 
 jobs:
   include:
@@ -40,4 +40,4 @@ notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/de552aa9082bfddb180d
-    on_cancel:  never
+    on_cancel: never

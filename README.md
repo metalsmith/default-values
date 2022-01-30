@@ -13,11 +13,13 @@ Uses [multimatch](https://github.com/sindresorhus/multimatch#multimatch-) for pa
 ## Installation
 
 NPM:
+
 ```bash
 npm install @metalsmith/default-values
 ```
 
 Yarn:
+
 ```bash
 yarn add @metalsmith/default-values
 ```
@@ -27,59 +29,61 @@ yarn add @metalsmith/default-values
 Pass `@metalsmith/default-values` to `metalsmith.use`:
 
 ```js
-const default_values = require('@metalsmith/default-values');
+const default_values = require('@metalsmith/default-values')
 
-metalsmith.use(default_values([
-  {
-    pattern : 'posts/*.md',
-    defaults: {
-      layout: 'post.hbs',
-      date: function (post) {
-        return post.stats.ctime;
+metalsmith.use(
+  default_values([
+    {
+      pattern: 'posts/*.md',
+      defaults: {
+        layout: 'post.hbs',
+        date: function (post) {
+          return post.stats.ctime
+        }
+      }
+    },
+    {
+      pattern: 'diary/*.md',
+      defaults: {
+        layout: 'diary.hbs',
+        private: true
+      }
+    },
+    {
+      pattern: ['diary/*.md', 'archive/**/*.md'],
+      defaults: {
+        no_index: true
+      }
+    },
+    {
+      pattern: '**/*.md',
+      defaults: {
+        layout: 'default.hbs'
       }
     }
-  },
-  {
-    pattern : 'diary/*.md',
-    defaults: {
-      layout : 'diary.hbs',
-      private: true
-    }
-  },
-  {
-    pattern : [
-      'diary/*.md',
-      'archive/**/*.md'
-    ],
-    defaults: {
-      no_index: true
-    }
-  },
-  {
-    pattern : '**/*.md',
-    defaults: {
-      layout : 'default.hbs'
-    }
-  }
-]))
+  ])
+)
 ```
 
 ### Options
 
 `@metalsmith/default-values` takes an array of objects which specify the defaults to set for all files matching a pattern. The objects have the following properties:
 
-* `pattern` (`string|string[]`): One or more glob patterns to match file paths
-* `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
+- `pattern` (`string|string[]`): One or more glob patterns to match file paths
+- `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
 
 ### Debug
 
 To enable debug logs, set the `DEBUG` environment variable to `@metalsmith/default-values`:
 
 Linux/Mac:
+
 ```
 DEBUG=@metalsmith/default-values
 ```
+
 Windows:
+
 ```
 set "DEBUG=@metalsmith/default-values"
 ```
@@ -112,11 +116,10 @@ To use this plugin with the Metalsmith CLI, add `@metalsmith/default-values` to 
 
 [GPL-3.0](LICENSE)
 
-
 [npm-badge]: https://img.shields.io/npm/v/@metalsmith/default-values.svg
 [npm-url]: https://www.npmjs.com/package/@metalsmith/default-values
 [ci-badge]: https://app.travis-ci.com/metalsmith/default-values.svg?branch=master
-[ci-url]: https://app.travis-ci.com/github/metalsmith/default-values
+[ci-url]: https://app.travis-ci.com/metalsmith/default-values
 [metalsmith-badge]: https://img.shields.io/badge/metalsmith-core_plugin-green.svg?longCache=true
 [metalsmith-url]: https://metalsmith.io
 [codecov-badge]: https://img.shields.io/coveralls/github/metalsmith/default-values

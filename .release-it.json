@@ -1,7 +1,6 @@
 {
   "hooks": {
     "before:init": ["npm run lint", "npm test"],
-    "after:bump": "auto-changelog -p --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)'",
     "after:npm:bump": "npm pack",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },
@@ -10,7 +9,7 @@
     "commitArgs": ["-S"],
     "tagAnnotation": "Release ${version}",
     "tagArgs": ["-s"],
-    "changelog": "auto-changelog -u --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)' --stdout"
+    "changelog": false
   },
   "npm": {
     "publish": false
