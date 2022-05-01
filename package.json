@@ -52,10 +52,14 @@
     "mocha": "^7.2.0",
     "nyc": "^15.1.0",
     "prettier": "^2.5.1",
-    "release-it": "^14.12.4"
+    "release-it": "^14.12.4",
+    "metalsmith": "^2.4.1"
+  },
+  "peerDependencies": {
+    "metalsmith": ">=2.4.1"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
   "publishConfig": {
     "access": "public"
