@@ -28,11 +28,12 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "changelog": "auto-changelog -u date --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)'",
-    "coverage": "nyc report --reporter=text-lcov > ./coverage.info",
-    "coveralls": "npm run coverage && cat ./coverage.info | coveralls",
+    "changelog": "auto-changelog -u --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)'",
     "format": "prettier --write \"**/*.{yml,md,js,json}\"",
-    "lint": "eslint --cache --fix-dry-run .",
+    "format:check": "prettier --list-different \"**/*.{yml,md,js,json}\"",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint --fix-dry-run .",
+    "coverage": "nyc report --reporter=text-lcov > ./coverage.info",
     "release": "release-it .",
     "test": "nyc mocha"
   },
