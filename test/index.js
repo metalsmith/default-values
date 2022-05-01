@@ -8,7 +8,6 @@ const plugin = require('..')
 const set_defaults_lib = require('../lib/set_defaults')
 
 describe('@metalsmith/default-values', function () {
-  
   it('should export a named plugin function matching package.json name', function () {
     const namechars = name.split('/')[1]
     const camelCased = namechars.split('').reduce((str, char, i) => {
@@ -30,15 +29,17 @@ describe('@metalsmith/default-values', function () {
   it('sets a key when not present', function (done) {
     const ms = Metalsmith(__dirname)
       .source('./fixture')
-      .use(plugin([
-      {
-        defaults: { default_val: true }
-      },
-      {
-        pattern: 'file2',
-        defaults: { another_default: 'hello' }
-      }
-    ]))
+      .use(
+        plugin([
+          {
+            defaults: { default_val: true }
+          },
+          {
+            pattern: 'file2',
+            defaults: { another_default: 'hello' }
+          }
+        ])
+      )
     const expected = {
       file1: {
         existing_key: 'yes',
@@ -52,17 +53,15 @@ describe('@metalsmith/default-values', function () {
     }
 
     function relevantProps(expected, files) {
-      return Object
-        .keys(expected)
-        .reduce((acc, filename) => {
-          acc[filename] = {}
-          Object.keys(expected[filename]).forEach(prop => {
-            acc[filename][prop] = files[filename] && files[filename][prop]
-          })
-          return acc
-        }, {})
+      return Object.keys(expected).reduce((acc, filename) => {
+        acc[filename] = {}
+        Object.keys(expected[filename]).forEach((prop) => {
+          acc[filename][prop] = files[filename] && files[filename][prop]
+        })
+        return acc
+      }, {})
     }
-  
+
     ms.process((err, files) => {
       assert.ifError(err, 'Has not errored')
       assert.deepStrictEqual(relevantProps(expected, files), expected)
