@@ -1,13 +1,36 @@
 const assert = require('assert')
 const { describe, it } = require('mocha')
+const { name } = require('../package.json')
+const Metalsmith = require('metalsmith')
 
 // metalsmith_default_values plugin
-const default_values_lib = require('..')
+const plugin = require('..')
 const set_defaults_lib = require('../lib/set_defaults')
 
 describe('@metalsmith/default-values', function () {
+  
+  it('should export a named plugin function matching package.json name', function () {
+    const namechars = name.split('/')[1]
+    const camelCased = namechars.split('').reduce((str, char, i) => {
+      str += namechars[i - 1] === '-' ? char.toUpperCase() : char === '-' ? '' : char
+      return str
+    }, '')
+    assert.strictEqual(plugin().name, camelCased)
+  })
+
+  it('should not crash the metalsmith build when using default options', function (done) {
+    Metalsmith(__dirname)
+      .source('.')
+      .use(plugin())
+      .process((err) => {
+        if (err) done(err)
+        else done()
+      })
+  })
   it('sets a key when not present', function (done) {
-    const default_values = default_values_lib([
+    const ms = Metalsmith(__dirname)
+      .source('./fixture')
+      .use(plugin([
       {
         defaults: { default_val: true }
       },
@@ -15,16 +38,7 @@ describe('@metalsmith/default-values', function () {
         pattern: 'file2',
         defaults: { another_default: 'hello' }
       }
-    ])
-    const actual = {
-      file1: {
-        existing_key: 'yes'
-      },
-      file2: {
-        existing_key: 'yes',
-        default_val: false
-      }
-    }
+    ]))
     const expected = {
       file1: {
         existing_key: 'yes',
@@ -36,9 +50,22 @@ describe('@metalsmith/default-values', function () {
         another_default: 'hello'
       }
     }
-    default_values(actual, void 0, (err) => {
+
+    function relevantProps(expected, files) {
+      return Object
+        .keys(expected)
+        .reduce((acc, filename) => {
+          acc[filename] = {}
+          Object.keys(expected[filename]).forEach(prop => {
+            acc[filename][prop] = files[filename] && files[filename][prop]
+          })
+          return acc
+        }, {})
+    }
+  
+    ms.process((err, files) => {
       assert.ifError(err, 'Has not errored')
-      assert.deepStrictEqual(actual, expected)
+      assert.deepStrictEqual(relevantProps(expected, files), expected)
       done()
     })
   })
