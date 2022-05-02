@@ -8,8 +8,6 @@ A Metalsmith plugin for setting default values to file metadata.
 [![code coverage][codecov-badge]][codecov-url]
 [![license: GPL-3.0][license-badge]][license-url]
 
-Uses [multimatch](https://github.com/sindresorhus/multimatch#multimatch-) for pattern matching.
-
 ## Installation
 
 NPM:
