@@ -27,10 +27,10 @@ yarn add @metalsmith/default-values
 Pass `@metalsmith/default-values` to `metalsmith.use`:
 
 ```js
-const default_values = require('@metalsmith/default-values')
+import defaultValues from '@metalsmith/default-values'
 
 metalsmith.use(
-  default_values([
+  defaultValues([
     {
       pattern: 'posts/*.md',
       defaults: {
@@ -67,7 +67,7 @@ metalsmith.use(
 
 `@metalsmith/default-values` takes an array of objects which specify the defaults to set for all files matching a pattern. The objects have the following properties:
 
-- `pattern` (`string|string[]`): One or more glob patterns to match file paths
+- `pattern` (`string|string[]`): One or more glob patterns to match file paths. Defaults to `'**'` (all).
 - `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
 
 ### Debug
@@ -116,8 +116,8 @@ To use this plugin with the Metalsmith CLI, add `@metalsmith/default-values` to 
 
 [npm-badge]: https://img.shields.io/npm/v/@metalsmith/default-values.svg
 [npm-url]: https://www.npmjs.com/package/@metalsmith/default-values
-[ci-badge]: https://app.travis-ci.com/metalsmith/default-values.svg?branch=master
-[ci-url]: https://app.travis-ci.com/metalsmith/default-values
+[ci-badge]: https://github.com/metalsmith/default-values/actions/workflows/test.yml/badge.svg
+[ci-url]: https://github.com/metalsmith/default-values/actions/workflows/test.yml
 [metalsmith-badge]: https://img.shields.io/badge/metalsmith-core_plugin-green.svg?longCache=true
 [metalsmith-url]: https://metalsmith.io
 [codecov-badge]: https://img.shields.io/coveralls/github/metalsmith/default-values
