@@ -70,6 +70,8 @@ metalsmith.use(
 - `pattern` (`string|string[]`): One or more glob patterns to match file paths. Defaults to `'**'` (all).
 - `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
 
+You can pass omit the array if you only need a single defaults set `[ DefaultsSet ]`.
+
 ### Debug
 
 To enable debug logs, set the `DEBUG` environment variable to `@metalsmith/default-values*`:
