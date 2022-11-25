@@ -29,6 +29,14 @@ Pass `@metalsmith/default-values` to `metalsmith.use`:
 ```js
 import defaultValues from '@metalsmith/default-values'
 
+// single defaults set for all HTML and markdown files
+metalsmith.use({
+  defaults: {
+    pattern: '**/*.{html,md}',
+    title: 'Lorem ipsum'
+  }
+})
+
 metalsmith.use(
   defaultValues([
     {
@@ -71,6 +79,43 @@ metalsmith.use(
 - `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
 
 You can pass omit the array if you only need a single defaults set `[ DefaultsSet ]`.
+
+### Examples
+
+#### Combining with other plugins
+
+@metalsmith/default-values works great with other `@metalsmith` plugins. The example below attaches a collection and layout matching the parent directory for all files in the directories `services`,`products`, and `articles`:
+
+```js
+import slugify from 'slugify'
+const contentTypes = ['product', 'service', 'article']
+
+metalsmith
+  .use(
+    defaultValues(
+      contentTypes.map((contentType) => ({
+        pattern: `${contentType}s/*.md`, // pluralized
+        defaults: {
+          collection: `${contentType}s`, // pluralized
+          bodyClass: contentType,
+          layout: `${contentType}.njk`, // using jstransformer-nunjucks
+          contentLength(file) {
+            if (file.contents) return file.contents.toString().length
+            return 0
+          }
+        }
+      }))
+    )
+  )
+  .use(markdown()) // @metalsmith/markdown
+  .use(collections()) // @metalsmith/collections
+  .use(
+    layouts({
+      // @metalsmith/layouts
+      pattern: '**/*.html'
+    })
+  )
+```
 
 ### Debug
 
