@@ -72,18 +72,10 @@ metalsmith.use(
 
 ### Debug
 
-To enable debug logs, set the `DEBUG` environment variable to `@metalsmith/default-values`:
+To enable debug logs, set the `DEBUG` environment variable to `@metalsmith/default-values*`:
 
-Linux/Mac:
-
-```
-DEBUG=@metalsmith/default-values
-```
-
-Windows:
-
-```
-set "DEBUG=@metalsmith/default-values"
+```js
+metalsmith.env('DEBUG', '@metalsmith/default-values*')
 ```
 
 Alternatively you can set `DEBUG` to `@metalsmith/*` to debug all Metalsmith core plugins.
