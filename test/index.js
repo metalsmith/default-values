@@ -6,6 +6,17 @@ const Metalsmith = require('metalsmith')
 // metalsmith_default_values plugin
 const plugin = require('..')
 const set_defaults_lib = require('../lib/set_defaults')
+const path = require('path')
+
+function relevantProps(expected, files) {
+  return Object.keys(expected).reduce((acc, filename) => {
+    acc[filename] = {}
+    Object.keys(expected[filename]).forEach((prop) => {
+      acc[filename][prop] = files[filename] && files[filename][prop]
+    })
+    return acc
+  }, {})
+}
 
 describe('@metalsmith/default-values', function () {
   it('should export a named plugin function matching package.json name', function () {
@@ -20,6 +31,7 @@ describe('@metalsmith/default-values', function () {
   it('should not crash the metalsmith build when using default options', function (done) {
     Metalsmith(__dirname)
       .source('.')
+      .env('DEBUG', process.env.DEBUG)
       .use(plugin())
       .process((err) => {
         if (err) done(err)
@@ -29,6 +41,7 @@ describe('@metalsmith/default-values', function () {
   it('sets a key when not present', function (done) {
     const ms = Metalsmith(__dirname)
       .source('./fixture')
+      .env('DEBUG', process.env.DEBUG)
       .use(
         plugin([
           {
@@ -52,20 +65,104 @@ describe('@metalsmith/default-values', function () {
       }
     }
 
-    function relevantProps(expected, files) {
-      return Object.keys(expected).reduce((acc, filename) => {
-        acc[filename] = {}
-        Object.keys(expected[filename]).forEach((prop) => {
-          acc[filename][prop] = files[filename] && files[filename][prop]
-        })
-        return acc
-      }, {})
-    }
-
     ms.process((err, files) => {
       assert.ifError(err, 'Has not errored')
       assert.deepStrictEqual(relevantProps(expected, files), expected)
       done()
+    })
+  })
+
+  it('logs a warning when no files match a pattern', function (done) {
+    let warning
+    function Debugger() {}
+    Debugger.warn = (msg) => {
+      warning = msg
+    }
+    Debugger.info = () => {}
+
+    const msStub = {
+      match() {
+        return []
+      },
+      debug() {
+        return Debugger
+      }
+    }
+
+    plugin([
+      {
+        pattern: 'non-existant',
+        defaults: { wontbeset: 1 }
+      }
+    ])({}, msStub, () => {
+      try {
+        assert.strictEqual(warning, 'No matches for pattern "%s"')
+      } catch (err) {
+        done(err)
+      }
+      done()
+    })
+  })
+
+  it('supports defining a function to return default value', function (done) {
+    const ms = Metalsmith(__dirname)
+      .source('./fixture')
+      .env('DEBUG', process.env.DEBUG)
+      .use(
+        plugin([
+          {
+            pattern: 'func',
+            defaults: {
+              computedDefault({ funcDefault }) {
+                return funcDefault + 100
+              }
+            }
+          }
+        ])
+      )
+    const expected = {
+      func: {
+        funcDefault: 1,
+        computedDefault: 101
+      }
+    }
+
+    ms.process((err, files) => {
+      if (err) done(err)
+      try {
+        assert.deepStrictEqual(relevantProps(expected, { func: files.func }), expected)
+        done()
+      } catch (err) {
+        done(err)
+      }
+    })
+  })
+
+  it('allows passing a single defaults set as shorthand', function (done) {
+    const ms = Metalsmith(__dirname)
+      .source('./fixture')
+      .env('DEBUG', process.env.DEBUG)
+      .use(
+        plugin({
+          defaults: { all: 'ok' }
+        })
+      )
+    const expected = {
+      file1: { all: 'ok' },
+      file2: { all: 'ok' },
+      func: { all: 'ok' }
+    }
+
+    expected[path.join('nested', 'index')] = { all: 'ok' }
+
+    ms.process((err, files) => {
+      if (err) done(err)
+      try {
+        assert.deepStrictEqual(relevantProps(expected, files), expected)
+        done()
+      } catch (err) {
+        done(err)
+      }
     })
   })
 
