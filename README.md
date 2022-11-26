@@ -8,6 +8,12 @@ A Metalsmith plugin for setting default values to file metadata.
 [![code coverage][codecov-badge]][codecov-url]
 [![license: GPL-3.0][license-badge]][license-url]
 
+## Features
+
+- sets default values for metadata keys and file contents on files matched by pattern
+- does not overwrite or transform key values that are already defined
+- can set computed defaults based on other metadata
+
 ## Installation
 
 NPM:
@@ -32,7 +38,7 @@ import defaultValues from '@metalsmith/default-values'
 // single defaults set for all HTML and markdown files
 metalsmith.use({
   defaults: {
-    pattern: '**/*.{html,md}',
+    pattern: '**/*.md',
     title: 'Lorem ipsum'
   }
 })
