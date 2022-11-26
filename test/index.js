@@ -13,6 +13,7 @@ function relevantProps(expected, files) {
     acc[filename] = {}
     Object.keys(expected[filename]).forEach((prop) => {
       acc[filename][prop] = files[filename] && files[filename][prop]
+      if (acc[filename][prop] instanceof Buffer) acc[filename][prop] = acc[filename][prop].toString()
     })
     return acc
   }, {})
@@ -158,6 +159,32 @@ describe('@metalsmith/default-values', function () {
     ms.process((err, files) => {
       if (err) done(err)
       try {
+        assert.deepStrictEqual(relevantProps(expected, files), expected)
+        done()
+      } catch (err) {
+        done(err)
+      }
+    })
+  })
+
+  it('allows setting default contents when empty buffer', function (done) {
+    const ms = Metalsmith(__dirname)
+      .source('./fixture')
+      .env('DEBUG', process.env.DEBUG)
+      .use(
+        plugin({
+          pattern: 'file*',
+          defaults: { contents: Buffer.from('Lorem ipsum') }
+        })
+      )
+
+    ms.process((err, files) => {
+      if (err) done(err)
+      try {
+        const expected = {
+          file1: { contents: 'Hello world' },
+          file2: { contents: 'Lorem ipsum' }
+        }
         assert.deepStrictEqual(relevantProps(expected, files), expected)
         done()
       } catch (err) {
