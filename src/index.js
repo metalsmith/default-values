@@ -10,7 +10,7 @@ import getDefaultsSetter from './set_defaults.js'
  * @typedef {Object} DefaultsSet
  * @property {string|string[]} [pattern="**"] 1 or more glob patterns to match files. Defaults to `'**'` (all).
  * @property {Object<string, *>} [defaults={}] an object whose keys will be set as file metadata keys
- * @property {'keep'|'overwrite'} strategy Strategy to handle setting defaults to keys that are aleady defined.
+ * @property {'keep'|'overwrite'} [strategy="keep"] Strategy to handle setting defaults to keys that are aleady defined. Defaults to `'keep'`
  */
 
 /** @type {DefaultsSet} */

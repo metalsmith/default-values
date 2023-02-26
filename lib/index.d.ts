@@ -1,17 +1,25 @@
 import { Plugin, File } from 'metalsmith';
 
 export default defaultValues;
-export interface DefaultsSet {
-  /** 1 or more glob patterns to match files. Defaults to `'**'` (all). */
-  pattern?: string;
+
+export type DefaultSetter<FileMeta, GlobalMeta> = (data:FileMeta, metadata: GlobalMeta) => any
+export interface DefaultsSet<FileMeta = File, GlobalMeta = {[key:string]:any}> {
   /** an object whose keys will be set as file metadata keys */
   defaults: {
-    [key:string]: ((data:File, metadata: {[key:string]:any}) => any)|string|boolean|number|Object;
+    [key:string]: DefaultSetter<FileMeta, GlobalMeta>|string|boolean|number|Object;
   }
-  /** Strategy to handle setting defaults to keys that are aleady defined. */
-  strategy: 'keep'|'overwrite'
+  /**
+   * 1 or more glob patterns to match files.
+   * @default '**'
+   **/
+  pattern?: string;
+  /**
+   * Strategy to handle setting defaults to keys that are aleady defined.
+   * @default 'keep'
+   */
+  strategy?: 'keep'|'overwrite'
 }
-export type Options = DefaultsSet|DefaultsSet[]
+export type Options<FileMeta, GlobalMeta> = DefaultsSet<FileMeta, GlobalMeta>|DefaultsSet<FileMeta, GlobalMeta>[]
 /**
  * Set `defaults` to file metadata matching `pattern`'s.
  * 
@@ -27,4 +35,4 @@ export type Options = DefaultsSet|DefaultsSet[]
     }
   }))
  **/
-declare function defaultValues(options: Options): Plugin;
+declare function defaultValues<FileMeta = File, GlobalMeta = {[key:string]:any}>(options: Options<FileMeta, GlobalMeta>): Plugin;
