@@ -6,6 +6,7 @@ const { name } = require('../package.json')
 const Metalsmith = require('metalsmith')
 
 // metalsmith_default_values plugin
+// eslint-disable-next-line n/no-missing-require
 const plugin = require('..')
 let set_defaults_lib
 const path = require('path')
@@ -196,6 +197,30 @@ describe('@metalsmith/default-values', function () {
           file2: { contents: 'Lorem ipsum' }
         }
         assert.deepStrictEqual(relevantProps(expected, files), expected)
+        done()
+      } catch (err) {
+        done(err)
+      }
+    })
+  })
+
+  // this is essential for CLI flows to be able to set default values in JSON
+  it('converts non-buffer defaults to buffers if the target key is already a buffer', function (done) {
+    const ms = Metalsmith(__dirname)
+      .source('./fixture')
+      .env('DEBUG', process.env.DEBUG)
+      .use(
+        plugin({
+          pattern: 'file2',
+          defaults: { contents: 'Lorem ipsum' }
+        })
+      )
+
+    ms.process((err, files) => {
+      if (err) done(err)
+      try {
+        assert(Buffer.isBuffer(files.file2.contents))
+        assert.strictEqual(files.file2.contents.toString(), 'Lorem ipsum')
         done()
       } catch (err) {
         done(err)

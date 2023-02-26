@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer'
 import get from 'dlv'
 import { dset as set } from 'dset'
 
@@ -15,9 +16,10 @@ function set_defaults(defaults, strategy) {
         strategy === 'overwrite' ||
         value === void 0 ||
         value === null ||
-        (key === 'contents' && item.contents.toString().trim().length === 0)
+        (Buffer.isBuffer(value) && value.toString().trim().length === 0)
       ) {
         if (typeof defaultValue === 'function') defaultValue = defaultValue(item, context)
+        if (Buffer.isBuffer(value) && !Buffer.isBuffer(defaultValue)) defaultValue = Buffer.from(defaultValue)
         set(item, key, defaultValue)
       }
     })
