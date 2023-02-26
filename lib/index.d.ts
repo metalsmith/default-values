@@ -1,5 +1,4 @@
-import { Plugin } from 'metalsmith';
-import defaultValues from '.';
+import { Plugin, File } from 'metalsmith';
 
 export default defaultValues;
 export interface DefaultsSet {
@@ -7,7 +6,7 @@ export interface DefaultsSet {
   pattern?: string;
   /** an object whose keys will be set as file metadata keys */
   defaults: {
-    [key:string]: string;
+    [key:string]: ((data:File, metadata: {[key:string]:any}) => any)|string|boolean|number|Object;
   }
   /** Strategy to handle setting defaults to keys that are aleady defined. */
   strategy: 'keep'|'overwrite'

@@ -1,9 +1,15 @@
 import getDefaultsSetter from './set_defaults.js'
 
 /**
+ * @callback DefaultSetter
+ * @param {import('metalsmith').File} file
+ * @param {Object<string, *>} metadata
+ */
+
+/**
  * @typedef {Object} DefaultsSet
  * @property {string|string[]} [pattern="**"] 1 or more glob patterns to match files. Defaults to `'**'` (all).
- * @property {Object} [defaults={}] an object whose keys will be set as file metadata keys
+ * @property {Object<string, *>} [defaults={}] an object whose keys will be set as file metadata keys
  * @property {'keep'|'overwrite'} strategy Strategy to handle setting defaults to keys that are aleady defined.
  */
 
@@ -50,7 +56,7 @@ function defaultValues(options) {
       if (matches.length) {
         const setDefaults = getDefaultsSetter(defaultsEntries, strategy)
         matches.forEach((file) => {
-          setDefaults(files[file])
+          setDefaults(files[file], metalsmith.metadata())
           debug.info(
             'Defaults set for file "%s", the resulting metadata is: %O',
             file,

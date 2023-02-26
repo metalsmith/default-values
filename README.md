@@ -12,7 +12,7 @@ A Metalsmith plugin for setting default values to file metadata.
 
 - sets default values for metadata keys and file contents on files matched by pattern
 - does not overwrite or transform key values that are already defined, unless `strategy: 'overwrite'`.
-- can set computed defaults based on other metadata
+- can set computed defaults based on other file keys or metalsmith metadata
 
 ## Installation
 
@@ -82,7 +82,7 @@ metalsmith.use(
 `@metalsmith/default-values` takes an array of defaults sets or a single defaults set. The defaults set has the following properties:
 
 - `pattern` (`string|string[]`): One or more glob patterns to match file paths. Defaults to `'**'` (all).
-- `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file)` to set dynamic defaults based on other, existing file metadata.
+- `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file, metadata)` to set dynamic defaults based on existing file or global metadata.
 - `strategy` (`'keep'|'overwrite'`): Strategy to handle setting defaults to keys that are aleady defined.
 
 ### Examples
@@ -98,6 +98,32 @@ metalsmith.use(
     contents: Buffer.from('TO DO')
   })
 )
+```
+
+#### Setting dynamic defaults
+
+You can set dynamic defaults based on current file metadata or metalsmith metadata:
+
+```js
+metalsmith
+  .metadata({
+    build: { timestamp: Date.now() }
+  })
+  .use(
+    defaultValues([
+      {
+        strategy: 'overwrite',
+        defaults: {
+          buildInfo(file, metadata) {
+            return metadata.build
+          },
+          excerpt(file) {
+            return file.contents.toString().slice(0, 200)
+          }
+        }
+      }
+    ])
+  )
 ```
 
 #### Combining with other plugins

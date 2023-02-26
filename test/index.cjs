@@ -22,7 +22,7 @@ function relevantProps(expected, files) {
 }
 
 describe('@metalsmith/default-values', function () {
-  before(function(done) {
+  before(function (done) {
     // eslint-disable-next-line import/no-internal-modules
     import('../src/set_defaults.js').then(imported => {
       set_defaults_lib = imported.default
@@ -85,11 +85,11 @@ describe('@metalsmith/default-values', function () {
 
   it('logs a warning when no files match a pattern', function (done) {
     let warning
-    function Debugger() {}
+    function Debugger() { }
     Debugger.warn = (msg) => {
       warning = msg
     }
-    Debugger.info = () => {}
+    Debugger.info = () => { }
 
     const msStub = {
       match() {
@@ -241,6 +241,23 @@ describe('@metalsmith/default-values', function () {
       const expected = {
         initial: 'no',
         default_val: true
+      }
+
+      assert.deepStrictEqual(actual, expected)
+    })
+
+    it('sets a default computed from additional metadata', function () {
+      const defaults = {
+        default_val: true, buildVersion(file, globalMeta) {
+          return globalMeta.buildVersion
+        }
+      }
+      const set_defaults = set_defaults_lib(Object.entries(defaults))
+      const actual = set_defaults({ initial: 'yes' }, { buildVersion: '1.0.0' })
+      const expected = {
+        initial: 'yes',
+        default_val: true,
+        buildVersion: '1.0.0'
       }
 
       assert.deepStrictEqual(actual, expected)
