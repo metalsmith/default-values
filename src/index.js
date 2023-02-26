@@ -1,4 +1,4 @@
-import set_defaults from './set_defaults.js'
+import getDefaultsSetter from './set_defaults.js'
 
 /**
  * @typedef {Object} DefaultsSet
@@ -45,10 +45,12 @@ function defaultValues(options) {
     // Loop through configurations
     defaultSets.forEach(function ({ pattern, defaults, strategy }) {
       const matches = metalsmith.match(pattern, Object.keys(files))
+      const defaultsEntries = Object.entries(defaults)
       debug.info('Matched %s files to pattern "%s": %o', matches.length, pattern, matches)
       if (matches.length) {
+        const setDefaults = getDefaultsSetter(defaultsEntries, strategy)
         matches.forEach((file) => {
-          set_defaults(defaults, strategy)(files[file])
+          setDefaults(files[file])
           debug.info(
             'Defaults set for file "%s", the resulting metadata is: %O',
             file,

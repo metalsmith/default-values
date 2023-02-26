@@ -214,7 +214,7 @@ describe('@metalsmith/default-values', function () {
       const defaults = {
         default_val: true
       }
-      const set_defaults = set_defaults_lib(defaults)
+      const set_defaults = set_defaults_lib(Object.entries(defaults))
       assert.strictEqual(typeof set_defaults, 'function', 'Function returned after initialisation')
       const actual = set_defaults({
         initial: 'yes'
@@ -233,7 +233,7 @@ describe('@metalsmith/default-values', function () {
         initial: 'no',
         default_val: true
       }
-      const set_defaults = set_defaults_lib(defaults, 'overwrite')
+      const set_defaults = set_defaults_lib(Object.entries(defaults), 'overwrite')
       assert.strictEqual(typeof set_defaults, 'function', 'Function returned after initialisation')
       const actual = set_defaults({
         initial: 'yes'
