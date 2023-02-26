@@ -87,18 +87,35 @@ metalsmith.use(
 
 ### Examples
 
-#### Setting default contents
+#### Setting defaults at a keypath
 
-Since version 3.3.0 the Metalsmith File's contents (which are a Node buffer) default can also be set (only if the buffer is empty):
+You can set a default at a file's nested keypath:
 
 ```js
 metalsmith.use(
   defaultValues({
     pattern: '**/*.md',
+    pubdate(file) { return new Date() }
+    'config.scripts.app': '/app.js',
+  })
+)
+```
+
+#### Setting default contents
+
+You can set a file's default contents (which is a Node buffer) and any other Buffer properties:
+
+```js
+metalsmith.use(
+  defaultValues({
+    pattern: '**/*.md',
+    strategy: 'overwrite',
     contents: Buffer.from('TO DO')
   })
 )
 ```
+
+When using a JSON config, a string can be used as default and it will automatically be transformed into a buffer.
 
 #### Setting dynamic defaults
 

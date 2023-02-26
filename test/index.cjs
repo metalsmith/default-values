@@ -288,4 +288,25 @@ describe('@metalsmith/default-values', function () {
       assert.deepStrictEqual(actual, expected)
     })
   })
+
+  // this is essential for CLI flows to be able to set default values in JSON
+  it('sets a default at a key path ', function () {
+      const defaults = {
+        'some.nested.def.value': true
+      }
+      const set_defaults = set_defaults_lib(Object.entries(defaults))
+      const actual = set_defaults({ initial: 'yes' })
+      const expected = {
+        initial: 'yes',
+        some: {
+          nested: {
+            def: {
+              value: true
+            }
+          }
+        }
+      }
+
+      assert.deepStrictEqual(actual, expected)
+  })
 })

@@ -39,7 +39,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "changelog": "auto-changelog -u --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)'",
+    "changelog": "auto-changelog -u --commit-limit false --ignore-commit-pattern '^((dev|chore|test|ci):|Release)'",
     "format": "prettier --write \"**/*.{yml,md,js,json}\"",
     "format:check": "prettier --list-different \"**/*.{yml,md,js,json}\"",
     "lint": "eslint --fix .",
