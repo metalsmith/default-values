@@ -1,6 +1,4 @@
-'use strict'
-
-const set_defaults = require('./set_defaults')
+import set_defaults from './set_defaults.js'
 
 /**
  * @typedef {Object} DefaultsSet
@@ -67,4 +65,4 @@ function defaultValues(options) {
   }
 }
 
-module.exports = defaultValues
+export default defaultValues

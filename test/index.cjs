@@ -1,3 +1,5 @@
+/* eslint-env node, mocha */
+
 const assert = require('assert')
 const { describe, it } = require('mocha')
 const { name } = require('../package.json')
@@ -5,7 +7,7 @@ const Metalsmith = require('metalsmith')
 
 // metalsmith_default_values plugin
 const plugin = require('..')
-const set_defaults_lib = require('../lib/set_defaults')
+let set_defaults_lib
 const path = require('path')
 
 function relevantProps(expected, files) {
@@ -20,6 +22,14 @@ function relevantProps(expected, files) {
 }
 
 describe('@metalsmith/default-values', function () {
+  before(function(done) {
+    // eslint-disable-next-line import/no-internal-modules
+    import('../src/set_defaults.js').then(imported => {
+      set_defaults_lib = imported.default
+      done()
+    })
+  })
+
   it('should export a named plugin function matching package.json name', function () {
     const namechars = name.split('/')[1]
     const camelCased = namechars.split('').reduce((str, char, i) => {

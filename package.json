@@ -21,7 +21,15 @@
   "maintainers": [
     "Kevin Van Lierde (https://webketje.com)"
   ],
-  "main": "lib/index.js",
+  "source": "src/index.js",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "exports": {
+    "import": "./lib/index.js",
+    "require": "./lib/index.cjs"
+  },
+  "type": "module",
+  "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -38,7 +46,9 @@
     "lint:check": "eslint --fix-dry-run .",
     "coverage": "nyc report --reporter=text-lcov > ./coverage.info",
     "release": "release-it .",
-    "test": "nyc mocha"
+    "build": "microbundle --target node --no-sourcemap -f cjs,esm --generateTypes=false",
+    "test": "nyc mocha",
+    "pretest": "npm run build"
   },
   "dependencies": {
     "lodash.get": "^4.4.2",
@@ -46,20 +56,22 @@
   },
   "devDependencies": {
     "auto-changelog": "^2.4.0",
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
     "metalsmith": "^2.5.1",
+    "microbundle": "^0.15.1",
     "mocha": "^9.2.2",
     "nyc": "^15.1.0",
-    "prettier": "^2.8.0",
-    "release-it": "^15.5.0"
+    "prettier": "^2.8.4",
+    "release-it": "^15.6.0"
   },
   "peerDependencies": {
     "metalsmith": "^2.5.0"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=12.17.0 <13.0.0-0||>=13.2.0"
   },
   "publishConfig": {
     "access": "public"
