@@ -1,5 +1,5 @@
-import get from 'lodash.get'
-import set from 'lodash.set'
+import get from 'dlv'
+import { dset as set } from 'dset'
 
 /**
  * Sets defaults for object values
