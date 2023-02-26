@@ -226,5 +226,24 @@ describe('@metalsmith/default-values', function () {
 
       assert.deepStrictEqual(actual, expected)
     })
+
+
+    it('overwrites a key when strategy is "overwrite"', function () {
+      const defaults = {
+        initial: 'no',
+        default_val: true
+      }
+      const set_defaults = set_defaults_lib(defaults, 'overwrite')
+      assert.strictEqual(typeof set_defaults, 'function', 'Function returned after initialisation')
+      const actual = set_defaults({
+        initial: 'yes'
+      })
+      const expected = {
+        initial: 'no',
+        default_val: true
+      }
+
+      assert.deepStrictEqual(actual, expected)
+    })
   })
 })

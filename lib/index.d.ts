@@ -9,6 +9,8 @@ export interface DefaultsSet {
   defaults: {
     [key:string]: string;
   }
+  /** Strategy to handle setting defaults to keys that are aleady defined. */
+  strategy: 'keep'|'overwrite'
 }
 export type Options = DefaultsSet|DefaultsSet[]
 /**
