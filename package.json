@@ -44,10 +44,10 @@
     "format:check": "prettier --list-different \"**/*.{yml,md,js,json}\"",
     "lint": "eslint --fix .",
     "lint:check": "eslint --fix-dry-run .",
-    "coverage": "nyc report --reporter=text-lcov > ./coverage.info",
+    "coverage": "npm test && c8 report --reporter=text-lcov > ./coverage.info",
     "release": "release-it .",
     "build": "microbundle --target node --no-sourcemap -f cjs,esm --generateTypes=false",
-    "test": "nyc mocha",
+    "test": "c8 mocha",
     "pretest": "npm run build"
   },
   "dependencies": {
@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "auto-changelog": "^2.4.0",
+    "c8": "^9.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -63,7 +64,6 @@
     "metalsmith": "^2.6.3",
     "microbundle": "^0.15.1",
     "mocha": "^10.3.0",
-    "nyc": "^15.1.0",
     "prettier": "^3.2.5",
     "release-it": "^17.1.1"
   },

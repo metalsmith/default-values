@@ -1,15 +1,16 @@
 /* eslint-env node, mocha */
+import { fileURLToPath } from 'node:url'
+import { readFileSync } from 'node:fs'
+import assert from 'node:assert'
+import path from 'node:path'
 
-const assert = require('assert')
-const { describe, it } = require('mocha')
-const { name } = require('../package.json')
-const Metalsmith = require('metalsmith')
+import Metalsmith from 'metalsmith'
+import plugin from '../src/index.js'
 
-// metalsmith_default_values plugin
-// eslint-disable-next-line n/no-missing-require
-const plugin = require('..')
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const { name } = JSON.parse(readFileSync(path.resolve(__dirname, '../package.json')))
+
 let set_defaults_lib
-const path = require('path')
 
 function relevantProps(expected, files) {
   return Object.keys(expected).reduce((acc, filename) => {
@@ -24,8 +25,7 @@ function relevantProps(expected, files) {
 
 describe('@metalsmith/default-values', function () {
   before(function (done) {
-    // eslint-disable-next-line import/no-internal-modules
-    import('../src/set_defaults.js').then(imported => {
+    import('../src/set_defaults.js').then((imported) => {
       set_defaults_lib = imported.default
       done()
     })
@@ -86,11 +86,11 @@ describe('@metalsmith/default-values', function () {
 
   it('logs a warning when no files match a pattern', function (done) {
     let warning
-    function Debugger() { }
+    function Debugger() {}
     Debugger.warn = (msg) => {
       warning = msg
     }
-    Debugger.info = () => { }
+    Debugger.info = () => {}
 
     const msStub = {
       match() {
@@ -252,7 +252,6 @@ describe('@metalsmith/default-values', function () {
       assert.deepStrictEqual(actual, expected)
     })
 
-
     it('overwrites a key when strategy is "overwrite"', function () {
       const defaults = {
         initial: 'no',
@@ -273,7 +272,8 @@ describe('@metalsmith/default-values', function () {
 
     it('sets a default computed from additional metadata', function () {
       const defaults = {
-        default_val: true, buildVersion(file, globalMeta) {
+        default_val: true,
+        buildVersion(file, globalMeta) {
           return globalMeta.buildVersion
         }
       }
@@ -291,22 +291,22 @@ describe('@metalsmith/default-values', function () {
 
   // this is essential for CLI flows to be able to set default values in JSON
   it('sets a default at a key path ', function () {
-      const defaults = {
-        'some.nested.def.value': true
-      }
-      const set_defaults = set_defaults_lib(Object.entries(defaults))
-      const actual = set_defaults({ initial: 'yes' })
-      const expected = {
-        initial: 'yes',
-        some: {
-          nested: {
-            def: {
-              value: true
-            }
+    const defaults = {
+      'some.nested.def.value': true
+    }
+    const set_defaults = set_defaults_lib(Object.entries(defaults))
+    const actual = set_defaults({ initial: 'yes' })
+    const expected = {
+      initial: 'yes',
+      some: {
+        nested: {
+          def: {
+            value: true
           }
         }
       }
+    }
 
-      assert.deepStrictEqual(actual, expected)
+    assert.deepStrictEqual(actual, expected)
   })
 })
