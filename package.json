@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/metalsmith/default-values.git"
   },
-  "license": "GPL-3.0",
+  "license": "LGPL-3.0-or-later",
   "author": "Woody Goodricke <github@andrewgoodricke.com>",
   "maintainers": [
     "Kevin Van Lierde (https://webketje.com)"

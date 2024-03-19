@@ -6,7 +6,7 @@ A Metalsmith plugin for setting default values to file metadata.
 [![npm: version][npm-badge]][npm-url]
 [![ci: build][ci-badge]][ci-url]
 [![code coverage][codecov-badge]][codecov-url]
-[![license: GPL-3.0][license-badge]][license-url]
+[![license: LGPL-3.0][license-badge]][license-url]
 
 ## Features
 
@@ -212,7 +212,7 @@ To use this plugin with the Metalsmith CLI, add `@metalsmith/default-values` to 
 
 ## License
 
-[GPL-3.0](LICENSE)
+[LGPL-3.0 or later](LICENSE)
 
 [npm-badge]: https://img.shields.io/npm/v/@metalsmith/default-values.svg
 [npm-url]: https://www.npmjs.com/package/@metalsmith/default-values
