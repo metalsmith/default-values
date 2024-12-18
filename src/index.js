@@ -42,10 +42,10 @@ const defaultDefaultsSet = {
 function defaultValues(options) {
   return function defaultValues(files, metalsmith, done) {
     const debug = metalsmith.debug('@metalsmith/default-values')
-    debug('Running with options: %O ', options)
     if (!Array.isArray(options) && typeof options === 'object' && options !== null) {
       options = [options]
     }
+    debug('Running with options: %O ', options)
     const defaultSets = (options || []).map((defaultsSet) => Object.assign({}, defaultDefaultsSet, defaultsSet))
 
     // Loop through configurations
@@ -56,15 +56,8 @@ function defaultValues(options) {
       if (matches.length) {
         const setDefaults = getDefaultsSetter(defaultsEntries, strategy)
         matches.forEach((file) => {
-          setDefaults(files[file], metalsmith.metadata())
-          debug.info(
-            'Defaults set for file "%s", the resulting metadata is: %O',
-            file,
-            Object.keys(defaults).reduce((resulting, prop) => {
-              resulting[prop] = files[file][prop]
-              return resulting
-            }, {})
-          )
+          const changed = setDefaults(files[file], metalsmith.metadata())
+          debug.info('Values set for file "%s": %O', file, changed)
         })
       } else {
         debug.warn('No matches for pattern "%s"', pattern)

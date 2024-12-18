@@ -10,6 +10,7 @@ import { dset as set } from 'dset'
  */
 function set_defaults(defaults, strategy) {
   return (item, context) => {
+    const delta = {}
     defaults.forEach(([key, defaultValue]) => {
       const value = get(item, key)
       if (
@@ -21,9 +22,10 @@ function set_defaults(defaults, strategy) {
         if (typeof defaultValue === 'function') defaultValue = defaultValue(item, context)
         if (Buffer.isBuffer(value) && !Buffer.isBuffer(defaultValue)) defaultValue = Buffer.from(defaultValue)
         set(item, key, defaultValue)
+        set(delta, key, defaultValue)
       }
     })
-    return item
+    return delta
   }
 }
 

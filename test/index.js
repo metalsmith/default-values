@@ -245,7 +245,6 @@ describe('@metalsmith/default-values', function () {
         initial: 'yes'
       })
       const expected = {
-        initial: 'yes',
         default_val: true
       }
 
@@ -270,7 +269,7 @@ describe('@metalsmith/default-values', function () {
       assert.deepStrictEqual(actual, expected)
     })
 
-    it('sets a default computed from additional metadata', function () {
+    it('sets a default computed from additional metadata and returns the delta', function () {
       const defaults = {
         default_val: true,
         buildVersion(file, globalMeta) {
@@ -280,7 +279,6 @@ describe('@metalsmith/default-values', function () {
       const set_defaults = set_defaults_lib(Object.entries(defaults))
       const actual = set_defaults({ initial: 'yes' }, { buildVersion: '1.0.0' })
       const expected = {
-        initial: 'yes',
         default_val: true,
         buildVersion: '1.0.0'
       }
@@ -297,7 +295,6 @@ describe('@metalsmith/default-values', function () {
     const set_defaults = set_defaults_lib(Object.entries(defaults))
     const actual = set_defaults({ initial: 'yes' })
     const expected = {
-      initial: 'yes',
       some: {
         nested: {
           def: {
