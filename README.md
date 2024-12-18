@@ -95,8 +95,41 @@ You can set a default at a file's nested keypath:
 metalsmith.use(
   defaultValues({
     pattern: '**/*.md',
-    pubdate(file) { return new Date() }
-    'config.scripts.app': '/app.js',
+    defaults: {
+      pubdate(file) { return new Date() }
+      'config.scripts.app': '/app.js'
+    }
+  })
+)
+```
+
+#### Setting default objects
+
+If you assign a default object like this:
+
+```js
+metalsmith.use(defaultValues({ defaults: { someObject: { id: 'some' } } }))
+```
+
+All files to which the value was set will refer to the same object (`files['index.html'].someObject === files['other.html'].someObject`). If the object needs to be unique for each file, use a default setter function or specify each property as a keypath:
+
+```js
+// using a function
+metalsmith.use(
+  defaultValues({
+    defaults: {
+      someObject: () => ({ id: 'some', other: true })
+    }
+  })
+)
+
+// using keypaths
+metalsmith.use(
+  defaultValues({
+    defaults: {
+      'someObject.id': 'some',
+      'someObject.other': true
+    }
   })
 )
 ```
@@ -109,8 +142,10 @@ You can set a file's default contents (which is a Node buffer) and any other Buf
 metalsmith.use(
   defaultValues({
     pattern: '**/*.md',
-    strategy: 'overwrite',
-    contents: Buffer.from('TO DO')
+    defaults: {
+      strategy: 'overwrite',
+      contents: Buffer.from('TO DO')
+    }
   })
 )
 ```
