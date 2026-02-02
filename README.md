@@ -82,7 +82,7 @@ metalsmith.use(
 `@metalsmith/default-values` takes an array of defaults sets or a single defaults set. The defaults set has the following properties:
 
 - `pattern` (`string|string[]`): One or more glob patterns to match file paths. Defaults to `'**'` (all).
-- `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a function `callback(file, metadata)` to set dynamic defaults based on existing file or global metadata.
+- `defaults` (`Object<string, any>`): An object whose key-value pairs will be added to file metadata. You can also specify a default setter with signature `callback(file, path, files, metalsmith) => any` to set dynamic defaults based on the file, its path, other files, global metadata, or metalsmith.env() values.
 - `strategy` (`'keep'|'overwrite'`): Strategy to handle setting defaults to keys that are aleady defined.
 
 ### Examples
@@ -166,8 +166,8 @@ metalsmith
       {
         strategy: 'overwrite',
         defaults: {
-          buildInfo(file, metadata) {
-            return metadata.build
+          buildInfo(file, path, files, metalsmith) {
+            return metalsmith.metadata().build
           },
           excerpt(file) {
             return file.contents.toString().slice(0, 200)
@@ -208,7 +208,7 @@ metalsmith
   .use(
     layouts({
       // @metalsmith/layouts
-      pattern: '**/*.html'
+      transformer: 'jstransformer-nunjucks'
     })
   )
 ```

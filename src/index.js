@@ -21,32 +21,37 @@ const defaultDefaultsSet = {
 }
 
 /**
- * Set `defaults` to file metadata matching `pattern`'s.
+ * Set `defaults` or _computed values_ to file metadata matching `pattern`'s.
  *
  * @param  {DefaultsSet|DefaultsSet[]} options an array of defaults sets to add to files matched by pattern
  * @return {import('metalsmith').Plugin}
- * 
  * @example
- * metalsmith.use(defaultValues({
-    pattern: 'posts/*.md',
-    defaults: {
-      layout: 'post.hbs',
-      draft: false,
-      date(post) {
-        return post.stats.ctime
-      }
-    }
-  }))
+ * metalsmith.use(defaultValues([{
+ *  pattern: 'posts/*.md',
+ *  defaults: {
+ *    layout: 'post.hbs',
+ *    draft: false,
+ *    'some.nested.property': true,
+ *    isodate(post, postPath, allFiles, metalsmith) {
+ *      return new Date(post.stats.ctime).toISOString()
+ *    }
+ *  }
+ *}))
  **/
 
 function defaultValues(options) {
   return function defaultValues(files, metalsmith, done) {
     const debug = metalsmith.debug('@metalsmith/default-values')
-    if (!Array.isArray(options) && typeof options === 'object' && options !== null) {
+    if (!options) {
+      debug.warn('No defaults specified. Skipping execution.')
+      done()
+      return
+    }
+    if (!Array.isArray(options) && typeof options === 'object') {
       options = [options]
     }
     debug('Running with options: %O ', options)
-    const defaultSets = (options || []).map((defaultsSet) => Object.assign({}, defaultDefaultsSet, defaultsSet))
+    const defaultSets = (options || []).map((defaultsSet) => ({ ...defaultDefaultsSet, ...defaultsSet }))
 
     // Loop through configurations
     defaultSets.forEach(function ({ pattern, defaults, strategy }) {
@@ -56,7 +61,7 @@ function defaultValues(options) {
       if (matches.length) {
         const setDefaults = getDefaultsSetter(defaultsEntries, strategy)
         matches.forEach((file) => {
-          const changed = setDefaults(files[file], metalsmith.metadata())
+          const changed = setDefaults(files[file], file, files, metalsmith)
           debug.info('Values set for file "%s": %O', file, changed)
         })
       } else {

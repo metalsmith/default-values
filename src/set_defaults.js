@@ -9,7 +9,7 @@ import { dset as set } from 'dset'
  * @return {import('.').DefaultSetter} Takes an object and sets defaults
  */
 function set_defaults(defaults, strategy) {
-  return (item, context) => {
+  return (item, ...args) => {
     const delta = {}
     defaults.forEach(([key, defaultValue]) => {
       const value = get(item, key)
@@ -19,7 +19,7 @@ function set_defaults(defaults, strategy) {
         value === null ||
         (Buffer.isBuffer(value) && value.toString().trim().length === 0)
       ) {
-        if (typeof defaultValue === 'function') defaultValue = defaultValue(item, context)
+        if (typeof defaultValue === 'function') defaultValue = defaultValue(item, ...args)
         if (Buffer.isBuffer(value) && !Buffer.isBuffer(defaultValue)) defaultValue = Buffer.from(defaultValue)
         set(item, key, defaultValue)
         set(delta, key, defaultValue)
