@@ -6,14 +6,20 @@ type File = Metalsmith.File<{
   draft?: boolean
 }>
 
-defaultValues<File, { buildVersion: 'v1.0.0' }>({
+type Meta = {
+  buildVersion: string
+}
+
+defaultValues<File>({
   strategy: 'overwrite',
   pattern: '**/*.html',
   defaults: {
     excerpt(file) {
       return file.contents.toString().slice(0, 250) + '...'
     },
-    buildVersion(_, meta) {
+    buildVersion(_, path, files, metalsmith) {
+      files[path].contents
+      const meta = metalsmith.metadata() as Meta
       return meta.buildVersion
     },
     draft(file) {

@@ -2,8 +2,10 @@ import getDefaultsSetter from './set_defaults.js'
 
 /**
  * @callback DefaultSetter
- * @param {import('metalsmith').File} file
- * @param {Object<string, *>} metadata
+ * @param {import('metalsmith').File} currentFile
+ * @param {string} currentPath
+ * @param {import('metalsmith').Files} files
+ * @param {import('metalsmith')} metadata
  */
 
 /**
@@ -51,7 +53,7 @@ function defaultValues(options) {
       options = [options]
     }
     debug('Running with options: %O ', options)
-    const defaultSets = (options || []).map((defaultsSet) => ({ ...defaultDefaultsSet, ...defaultsSet }))
+    const defaultSets = options.map((defaultsSet) => ({ ...defaultDefaultsSet, ...defaultsSet }))
 
     // Loop through configurations
     defaultSets.forEach(function ({ pattern, defaults, strategy }) {

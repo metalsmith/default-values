@@ -1,13 +1,17 @@
-import { Plugin, File } from 'metalsmith';
+import Metalsmith, { Plugin, File, Files } from 'metalsmith';
 
 export default defaultValues;
 
-export type DefaultSetter<FileMeta, GlobalMeta> = (data:FileMeta, metadata: GlobalMeta) => any
-export interface DefaultsSet<FileMeta = File, GlobalMeta = {[key:string]:any}> {
+export type DefaultSetter<FileMeta extends File = File> = (
+  currentFile: Readonly<FileMeta>, 
+  currentPath: Readonly<string>,
+  files:Readonly<Files>,
+  metalsmith:Readonly<Metalsmith>
+) => any
+
+export interface DefaultsSet<FileMeta extends File = File> {
   /** an object whose keys will be set as file metadata keys */
-  defaults: {
-    [key:string]: DefaultSetter<FileMeta, GlobalMeta>|string|boolean|number|Object;
-  }
+  defaults: Record<string, DefaultSetter<FileMeta>|string|boolean|number|object>
   /**
    * 1 or more glob patterns to match files.
    * @default '**'
@@ -19,20 +23,21 @@ export interface DefaultsSet<FileMeta = File, GlobalMeta = {[key:string]:any}> {
    */
   strategy?: 'keep'|'overwrite'
 }
-export type Options<FileMeta, GlobalMeta> = DefaultsSet<FileMeta, GlobalMeta>|DefaultsSet<FileMeta, GlobalMeta>[]
+export type Options<FileMeta extends File = File> = DefaultsSet<FileMeta>|DefaultsSet<FileMeta>[]
 /**
- * Set `defaults` to file metadata matching `pattern`'s.
+ * Set `defaults` or _computed values_ to file metadata matching `pattern`'s.
  * 
  * @example
- * metalsmith.use(defaultValues({
-    pattern: 'posts/*.md',
-    defaults: {
-      layout: 'post.hbs',
-      draft: false,
-      date(post) {
-        return post.stats.ctime
-      }
-    }
-  }))
+ * metalsmith.use(defaultValues([{
+ *  pattern: 'posts/*.md',
+ *  defaults: {
+ *    layout: 'post.hbs',
+ *    draft: false,
+ *    'some.nested.property': true,
+ *    isodate(post, postPath, allFiles, metalsmith) {
+ *      return new Date(post.stats.ctime).toISOString()
+ *    }
+ *  }
+ *}))
  **/
-declare function defaultValues<FileMeta = File, GlobalMeta = {[key:string]:any}>(options: Options<FileMeta, GlobalMeta>): Plugin;
+declare function defaultValues<FileMeta extends File = File>(options: Options<FileMeta>): Plugin;
