@@ -1,6 +1,6 @@
 {
   "name": "@metalsmith/default-values",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "A metalsmith plugin for setting default values to file metadata.",
   "keywords": [
     "default-values",
